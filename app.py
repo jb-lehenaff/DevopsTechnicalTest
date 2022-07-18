@@ -5,8 +5,7 @@ import boto3
 def push_to_s3(event_body, event_client, message_id):
     s3 = boto3.resource('s3')
     filepath = event_client + '/' + message_id + '.json'
-    s3.Bucket('bucketname').upload_file(filepath)
-    s3.upload_fileobj(io.BytesIO(event_body.encode("utf-8")), "myfile.txt")
+    s3.upload_fileobj(io.BytesIO(event_body.encode("utf-8")), Key=filepath)
 
 
 def process_event(event):
